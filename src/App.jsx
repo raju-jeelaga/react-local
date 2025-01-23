@@ -1,10 +1,16 @@
 import { useState } from 'react';
-
+import CoreConcept from './components/CoreConcept.jsx';
 import { CORE_CONCEPTS } from './data.jsx';
+import TabButtons from './components/TabButtons.jsx';
+import { EXAMPLES } from './data.jsx';
 
 function App() {
   const [item, setItem] = useState("");
   const [ItemList, setItemList] = useState([]);
+
+  const [selectedTopic, setselectedTopic] = useState('components');
+
+  //let tabContent = <p>Please select the Button</p>;
 
     function handleChangeItem(event){
         setItem(event.target.value);
@@ -21,15 +27,10 @@ function App() {
       setItemList(updatedItemList);
     }
 
-    function CoreConcept({image, title, description}){
-      return (
-        <li>
-          <img src={image} alt={title}/>
-          <h3>{title}</h3>
-          <p>{description}</p>
-        </li>
-      )
+    function handleSelect(selectedButton){
+      setselectedTopic(selectedButton);
     }
+
 
 
   return (
@@ -73,6 +74,22 @@ function App() {
           <CoreConcept {...CORE_CONCEPTS[2]} />
           <CoreConcept {...CORE_CONCEPTS[3]} />
         </ul>
+      </section>
+      <section id="examples">
+        <h2>Examples</h2>
+        <menu>
+          <TabButtons onSelect={() => handleSelect('components')} label="Components"/>
+          <TabButtons onSelect={() => handleSelect('jsx')} label="JSX"/>
+          <TabButtons onSelect={() => handleSelect('props')} label="Props"/>
+          <TabButtons onSelect={() => handleSelect('state')} label="State"/>
+        </menu>
+        <div id="tab-content">
+          <h3>{EXAMPLES[selectedTopic].title}</h3>
+          <p>{EXAMPLES[selectedTopic].description}</p>
+          <pre>
+            <code>{EXAMPLES[selectedTopic].code}</code>
+          </pre>
+        </div>
       </section>
       </main>
     </>
