@@ -10,7 +10,20 @@ function App() {
 
   const [selectedTopic, setselectedTopic] = useState('');
 
-  //let tabContent = <p>Please select the Button</p>;
+  let tabContent = <p>Please select the Button Atleast</p>;
+
+  if(selectedTopic){
+    tabContent = (
+      <div id="tab-content">
+        <h3>{EXAMPLES[selectedTopic].title}</h3>
+        <p>{EXAMPLES[selectedTopic].description}</p>
+        <pre>
+          <code>{EXAMPLES[selectedTopic].code}</code>
+        </pre>
+      </div>
+    );
+  
+  }
 
     function handleChangeItem(event){
         setItem(event.target.value);
@@ -83,18 +96,7 @@ function App() {
           <TabButtons onSelect={() => handleSelect('props')} label="Props"/>
           <TabButtons onSelect={() => handleSelect('state')} label="State"/>
         </menu>
-        {!selectedTopic ? <p>Please select the Button</p> : null}
-        {selectedTopic && (
-          <div id="tab-content">
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-              <code>{EXAMPLES[selectedTopic].code}</code>
-            </pre>
-          </div>
-        )}
-        
-
+        {tabContent}
       </section>
       </main>
     </>
