@@ -8,7 +8,7 @@ function App() {
   const [item, setItem] = useState("");
   const [ItemList, setItemList] = useState([]);
 
-  const [selectedTopic, setselectedTopic] = useState('components');
+  const [selectedTopic, setselectedTopic] = useState('');
 
   //let tabContent = <p>Please select the Button</p>;
 
@@ -83,13 +83,18 @@ function App() {
           <TabButtons onSelect={() => handleSelect('props')} label="Props"/>
           <TabButtons onSelect={() => handleSelect('state')} label="State"/>
         </menu>
-        <div id="tab-content">
-          <h3>{EXAMPLES[selectedTopic].title}</h3>
-          <p>{EXAMPLES[selectedTopic].description}</p>
-          <pre>
-            <code>{EXAMPLES[selectedTopic].code}</code>
-          </pre>
-        </div>
+        {!selectedTopic ? <p>Please select the Button</p> : null}
+        {selectedTopic && (
+          <div id="tab-content">
+            <h3>{EXAMPLES[selectedTopic].title}</h3>
+            <p>{EXAMPLES[selectedTopic].description}</p>
+            <pre>
+              <code>{EXAMPLES[selectedTopic].code}</code>
+            </pre>
+          </div>
+        )}
+        
+
       </section>
       </main>
     </>
