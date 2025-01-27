@@ -10,6 +10,8 @@ function App() {
 
   const [selectedTopic, setselectedTopic] = useState('');
 
+
+
   let tabContent = <p>Please select the Button Atleast</p>;
 
   if(selectedTopic){
@@ -44,6 +46,8 @@ function App() {
       setselectedTopic(selectedButton);
     }
 
+   
+
 
 
   return (
@@ -77,7 +81,10 @@ function App() {
       <section id="core-concepts">
         <h2>Core Concepts</h2>
         <ul>
-          <CoreConcept 
+          {CORE_CONCEPTS.map((conceptItem) => ( 
+            <CoreConcept key={conceptItem.title} {...conceptItem} />
+          ))}
+          {/* <CoreConcept 
             image={CORE_CONCEPTS[0].image}
             title={CORE_CONCEPTS[0].title}
             description={CORE_CONCEPTS[0].description}  
@@ -85,7 +92,7 @@ function App() {
           </CoreConcept>
           <CoreConcept {...CORE_CONCEPTS[1]} />
           <CoreConcept {...CORE_CONCEPTS[2]} />
-          <CoreConcept {...CORE_CONCEPTS[3]} />
+          <CoreConcept {...CORE_CONCEPTS[3]} /> */}
         </ul>
       </section>
       <section id="examples">
@@ -111,6 +118,8 @@ function App() {
         {tabContent}
       </section>
       </main>
+
+      
     </>
   )
 }
