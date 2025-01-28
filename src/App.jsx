@@ -3,6 +3,8 @@ import CoreConcept from './components/CoreConcept.jsx';
 import { CORE_CONCEPTS } from './data.jsx';
 import TabButtons from './components/TabButtons.jsx';
 import { EXAMPLES } from './data.jsx';
+import { PRODUCTS_LIST } from './products.jsx';
+import ProductList from './components/ProductList.jsx';
 
 function App() {
   const [item, setItem] = useState("");
@@ -116,6 +118,11 @@ function App() {
             label="State"/>
         </menu>
         {tabContent}
+      </section>
+      <section id="productslist">
+        {PRODUCTS_LIST.map((productlist) => (
+          <ProductList key={productlist.name} {...productlist}/>
+        ))}
       </section>
       </main>
 
