@@ -1,33 +1,11 @@
 import { useState } from 'react';
-import CoreConcept from './components/CoreConcept.jsx';
-import { CORE_CONCEPTS } from './data.jsx';
-import TabButtons from './components/TabButtons.jsx';
-import { EXAMPLES } from './data.jsx';
-import { PRODUCTS_LIST } from './products.jsx';
-import ProductList from './components/ProductList.jsx';
+import CoreConcepts from './components/CoreConcepts.jsx';
+import Examples from './components/Examples.jsx';
+import ProductLists from './components/ProductLists.jsx';
 
 function App() {
   const [item, setItem] = useState("");
   const [ItemList, setItemList] = useState([]);
-
-  const [selectedTopic, setselectedTopic] = useState('');
-
-
-
-  let tabContent = <p>Please select the Button Atleast</p>;
-
-  if(selectedTopic){
-    tabContent = (
-      <div id="tab-content">
-        <h3>{EXAMPLES[selectedTopic].title}</h3>
-        <p>{EXAMPLES[selectedTopic].description}</p>
-        <pre>
-          <code>{EXAMPLES[selectedTopic].code}</code>
-        </pre>
-      </div>
-    );
-  
-  }
 
     function handleChangeItem(event){
         setItem(event.target.value);
@@ -43,13 +21,6 @@ function App() {
       const updatedItemList = ItemList.filter((_, i) => i !== index);
       setItemList(updatedItemList);
     }
-
-    function handleSelect(selectedButton){
-      setselectedTopic(selectedButton);
-    }
-
-   
-
 
 
   return (
@@ -80,50 +51,10 @@ function App() {
       </ul>
       <hr></hr>
       <main>
-      <section id="core-concepts">
-        <h2>Core Concepts</h2>
-        <ul>
-          {CORE_CONCEPTS.map((conceptItem) => ( 
-            <CoreConcept key={conceptItem.title} {...conceptItem} />
-          ))}
-          {/* <CoreConcept 
-            image={CORE_CONCEPTS[0].image}
-            title={CORE_CONCEPTS[0].title}
-            description={CORE_CONCEPTS[0].description}  
-          >
-          </CoreConcept>
-          <CoreConcept {...CORE_CONCEPTS[1]} />
-          <CoreConcept {...CORE_CONCEPTS[2]} />
-          <CoreConcept {...CORE_CONCEPTS[3]} /> */}
-        </ul>
-      </section>
-      <section id="examples">
-        <h2>Examples</h2>
-        <menu>
-          <TabButtons 
-            isSelected={selectedTopic === 'components'}
-            onSelect={() => handleSelect('components')} 
-          label="Components"/>
-          <TabButtons 
-            isSelected={selectedTopic === 'jsx'}
-            onSelect={() => handleSelect('jsx')} 
-            label="JSX"/>
-          <TabButtons 
-            isSelected={selectedTopic === 'props'}
-            onSelect={() => handleSelect('props')} 
-            label="Props"/>
-          <TabButtons 
-            isSelected={selectedTopic === 'state'}
-            onSelect={() => handleSelect('state')} 
-            label="State"/>
-        </menu>
-        {tabContent}
-      </section>
-      <section id="productslist">
-        {PRODUCTS_LIST.map((productlist) => (
-          <ProductList key={productlist.name} {...productlist}/>
-        ))}
-      </section>
+      <CoreConcepts />
+      <Examples />
+      <ProductLists />
+      
       </main>
 
       
